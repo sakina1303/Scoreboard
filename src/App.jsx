@@ -8,33 +8,9 @@ const Meow= () => {
   const [score, setscore] = useState(0)
   const [balls, setballs] = useState(0)
 
-  const HandleZeroRun = () => {
-    setscore(score + 0)
-    setballs(balls + 1)
-
-  }
-  const HandleOneRun = () => {
-    setscore(score+1)
-    setballs(balls+1)
-  }
-  const HandleTwoRun = () => {
-    setscore(score+2)
-    setballs(balls+1)
-  }
-  const HandleThreeRun = () => {
-    setscore(score+3)
-    setballs(balls+1)
-  }
-  const HandleFourRun = () => {
-    setscore(score+4)
-    setballs(balls+1)
-  }
-  const HandleFiveRun = () => {
-    setscore(score+5)
-    setballs(balls+1)
-  }
-  const HandleSixRun = () => {
-    setscore(score+6)
+  
+  const HandleRun = (runs) => {
+    setscore(score+runs)
     setballs(balls+1)
   }
 
@@ -63,13 +39,13 @@ const Meow= () => {
     {/* <h2>Overs: 0</h2> */}
     <h2>Balls: {balls}</h2>
     <h2>Wickets: {Wickets}</h2>
-    <button onClick={ () => { HandleZeroRun()}}>Run: 0</button>
-    <button onClick= {() => { HandleOneRun()}}>Runs: 1</button>
-    <button onClick= {() => { HandleTwoRun()}}>Runs: 2</button>
-    <button onClick= {() => { HandleThreeRun()}}>Runs: 3</button>
-    <button onClick= {() => { HandleFourRun()}}>Runs: 4</button>
-    <button onClick= {() => { HandleFiveRun()}}>Runs: 5</button>
-    <button onClick= {() => { HandleSixRun()}}>Runs: 6</button>
+    <button onClick={ () => { HandleRun(0)}}>Run: 0</button>
+    <button onClick= {() => { HandleRun(1)}}>Runs: 1</button>
+    <button onClick= {() => { HandleRun(2)}}>Runs: 2</button>
+    <button onClick= {() => { HandleRun(3)}}>Runs: 3</button>
+    <button onClick= {() => { HandleRun(4)}}>Runs: 4</button>
+    <button onClick= {() => { HandleRun(5)}}>Runs: 5</button>
+    <button onClick= {() => { HandleRun(6)}}>Runs: 6</button>
     <br></br>
 
     <button onClick={HandleByeRun}>Bye</button>
