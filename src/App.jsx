@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import ScoreBoardHeader from './components/ScoreBoardHeader.jsx';
 import ScoreTracker from './components/ScoreTracker.jsx';
-import Wicket from './components/wicket.jsx';
+import Wicket from './components/Wicket.jsx';
 
 const Meow = () => {
   const [score, setScore] = useState(0);
