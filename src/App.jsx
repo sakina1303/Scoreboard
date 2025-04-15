@@ -1,59 +1,96 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { RiFacebookFill } from 'react-icons/ri'
+import { useState } from 'react';
+import './App.css';
+import ScoreBoardHeader from './components/ScoreBoardHeader.jsx';
+import ScoreTracker from './components/ScoreTracker.jsx';
+import Wicket from './components/wicket.jsx';
 
-const Meow= () => {
-  const [score, setscore] = useState(0)
-  const [balls, setballs] = useState(0)
+const Meow = () => {
+  const [score, setScore] = useState(0);
+  const [balls, setBalls] = useState(0);
+  const [over, setOver] = useState(0);
+  const [wickets, setWickets] = useState(0);
 
-  
   const HandleRun = (runs) => {
-    setscore(score+runs)
-    setballs(balls+1)
-  }
+    setScore(score + runs);
+    setBalls(balls + 1);
+    if (balls + 1 === 6) {
+      setBalls(0);
+      setOver(over + 1);
+    }
+  };
 
-  const HandleByeRun = () => {
-    setscore(score+1)
-  }
-   const HandleNoBallRun = () => {
-    setscore(score+1)
-  }
-  const HandleWideBallRun = () => {
-    setscore(score+1)
-  }
-  
- 
-  const [Wickets, setWickets] = useState(0)
+  const HandleExtraRun = () => {
+    setScore(score + 1);
+  };
+
   const incWickets = () => {
-    setWickets(Wickets + 1)
-    setballs(balls + 1)
-  }
- 
- 
-  return (
-    <div>
-    <h1>Score Board</h1>
-    <h2>Score: {score}</h2>
-    {/* <h2>Overs: 0</h2> */}
-    <h2>Balls: {balls}</h2>
-    <h2>Wickets: {Wickets}</h2>
-    <button onClick={ () => { HandleRun(0)}}>Run: 0</button>
-    <button onClick= {() => { HandleRun(1)}}>Runs: 1</button>
-    <button onClick= {() => { HandleRun(2)}}>Runs: 2</button>
-    <button onClick= {() => { HandleRun(3)}}>Runs: 3</button>
-    <button onClick= {() => { HandleRun(4)}}>Runs: 4</button>
-    <button onClick= {() => { HandleRun(5)}}>Runs: 5</button>
-    <button onClick= {() => { HandleRun(6)}}>Runs: 6</button>
-    <br></br>
+    if (wickets < 10) {
+      setWickets(wickets + 1);
+      setBalls(balls + 1);
+      if (balls + 1 === 6) {
+        setBalls(0);
+        setOver(over + 1);
+      }
+    }
+  };
 
-    <button onClick={HandleByeRun}>Bye</button>
-    <button onClick= {HandleNoBallRun}> No Ball</button>
-    <button onClick= {HandleWideBallRun}>Wide Ball</button>
-    <br></br>
-    <button onClick={ () => { incWickets()}}>Wicket</button>
+  const resetGame = () => {
+    setScore(0);
+    setBalls(0);
+    setOver(0);
+    setWickets(0);
+  };
+
+  const remainingBalls = 6 - balls;
+
+  let title = 'Score Board';
+  return (
+    <div className="scoreboard-container">
+      <ScoreBoardHeader title={title} />
+      <ScoreTracker score={score} />
+      <h2>Overs: {over}.{balls}</h2>
+      <h2>Remaining Balls in Over: {remainingBalls}</h2>
+      <Wicket title="Wickets" wickets={wickets} />
+
+      <div className="button-group">
+        <h3>Runs</h3>
+        {[0, 1, 2, 3, 4, 5, 6].map((run) => (
+          <button
+            key={run}
+            className="button"
+            onClick={() => HandleRun(run)}
+          >
+            Run: {run}
+          </button>
+        ))}
+      </div>
+
+      <div className="buttonss">
+        <h3>Extras</h3>
+        <button className="button" onClick={HandleExtraRun}>
+          Bye / No Ball / Wide
+        </button>
+      </div>
+
+      <div className="buttonss">
+        <h3>Wickets</h3>
+        <button
+          className="button"
+          onClick={incWickets}
+          disabled={wickets >= 10}
+        >
+          Wicket
+        </button>
+      </div>
+
+      <div className="buttonss">
+        <h3>Game Controls</h3>
+        <button className="button reset-button" onClick={resetGame}>
+          Reset Game
+        </button>
+      </div>
     </div>
-  )
-}
-export {Meow}
+  );
+};
+
+export { Meow };
