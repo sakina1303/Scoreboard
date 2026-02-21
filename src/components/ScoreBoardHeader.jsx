@@ -1,11 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
 
-const ScoreBoardHeader = (a) => { 
-    return( 
-    <div> 
-        <h1>{a.title}</h1>  
-     </div>
-    )
-}
+const ScoreBoardHeader = ({ title }) => {
+    return (
+        <header className="header card" role="banner">
+            <h1>{title}</h1>
+        </header>
+    );
+};
+
 export default ScoreBoardHeader;

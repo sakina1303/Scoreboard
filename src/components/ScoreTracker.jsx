@@ -1,11 +1,12 @@
 import React from "react";
 
-const ScoreTracker = (props) => {
-    return(
-        <div>
-            <h1>{props.title}</h1>
-            <h2>Score: {props.score}</h2>
+const ScoreTracker = ({ score }) => {
+    return (
+        <div className="score-tracker" aria-live="polite">
+            <h2>Score</h2>
+            <p className="score-value">{score}</p>
         </div>
-    )
-}
+    );
+};
+
 export default ScoreTracker;
