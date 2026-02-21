@@ -26,6 +26,7 @@
   text-align: center;
 }
 
+
 .card.stats {
   width: 100%;
   display: flex;
@@ -158,6 +159,7 @@
 }
   .card {
     padding: 1.5rem;
+    
   }
 
 
